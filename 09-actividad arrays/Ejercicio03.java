@@ -26,29 +26,34 @@ public class Ejercicio03 {
                  numero_registros = numero_registros-1;
                  System.out.println("Ingrese nombre del cliente: ");
                  String nombre_cliente = entrada.nextLine();
-                
-                for (int i = posicion; i < clientes.length-numero_registros; i++) {
+                int repetidos = 0;
+                for (int i = 0; i < posicion; i++) {
                     if (nombre_cliente.equalsIgnoreCase(clientes[i])){
                         System.out.println("Ingrese un nombre sin repetir porque "+nombre_cliente+" es igual a la posicion "+i+" = "+clientes[i]);
-                    }else{
-                        clientes[i] = nombre_cliente; 
+                        repetidos = 1;
+                        
                     }
+
+                    
                     
                 }
-                posicion = posicion+1;
-                 System.out.println("");
-                  System.out.println("");
+                   if (repetidos == 0) {
+                    clientes[posicion] = nombre_cliente;
+                     posicion = posicion+1;
+                    System.out.println("");
+                    System.out.println("");
+                    
+                    }
+               
             }
             if (opcion == 2) {
-                if (numero_registros<100) {
-                    System.out.print("[");
-                    for (int i = 0; i < clientes.length-numero_registros; i++) {
-                        System.out.print(clientes[i]+", ");
-                    }
-                    System.out.print("]");
-                    if (numero_registros == 100) {
-                        System.out.println("Primero ingresa Clientes para verlos");
-                    }
+                System.out.print("[");
+                for (int i = 0; i < posicion; i++) {
+                    System.out.print(clientes[i] + ", ");
+                }
+                System.out.print("]");
+                if (posicion == 0) {
+                    System.out.println("Primero ingresa Clientes para verlos");
                 }
                  System.out.println("");
                   System.out.println("");
@@ -62,16 +67,19 @@ public class Ejercicio03 {
                             if (nombre_cliente.equalsIgnoreCase(clientes[i])) {
                             System.out.println("Ingrese nuevo nombre del cliente: ");
                             nombre_cliente = entrada.nextLine();
-
+                                int repetidos = 0;
                             for (int j = 0; j < clientes.length;j++){
                                 if (nombre_cliente.equalsIgnoreCase(clientes[j])) {
                                   System.out.println("Ingrese un nombre sin repetir porque "+nombre_cliente+" es igual a la posicion "+j+" = "+clientes[j]);
-                                }else{
-                                    clientes[i] = nombre_cliente;
+                                  repetidos += 1;
                                 }
 
                             }
-                            
+                            if (repetidos == 0) {
+                                
+                                    clientes[i] = nombre_cliente;
+                                
+                            }
 
                                 }
                         } if (i == clientes.length-1) {
@@ -125,7 +133,7 @@ public class Ejercicio03 {
             }
             if (opcion > 5 || opcion < 1)  {
                 System.out.print("Ingresa un numero valido");
-                 System.out.println("");
+                
             }
         
         }  while (numero_registros > 0);

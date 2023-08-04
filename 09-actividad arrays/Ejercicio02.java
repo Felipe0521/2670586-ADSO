@@ -44,7 +44,7 @@ public class Ejercicio02 {
            
             if (i == arreglo.length-1) {
                 if (nombre.equalsIgnoreCase(arreglo[i])) {
-                System.out.println( "El nombre es igual a la posicion"+i+": "+arreglo[i] );
+                System.out.println( "El nombre es igual a la posicion "+i+": "+arreglo[i] );
                 
             }else{
                   System.out.println( "Los nombres son diferentes" );
