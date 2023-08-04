@@ -123,6 +123,10 @@ public class Ejercicio03 {
              if (opcion == 5) {
                 numero_registros = 0;
             }
+            if (opcion > 5 || opcion < 1)  {
+                System.out.print("Ingresa un numero valido");
+                 System.out.println("");
+            }
         
         }  while (numero_registros > 0);
     }
