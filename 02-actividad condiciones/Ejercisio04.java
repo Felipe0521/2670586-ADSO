@@ -27,6 +27,9 @@ public class Ejercisio04 {
        }if (num3 > num2 && num2>num1) {
         System.out.println("el numero 3 es el mayor ");
         System.out.println("el numero 1 es el menor ");
+       }else  if (num1 > num2 && num2 < num3) {
+        System.out.println("el numero 1 es el mayor ");
+        System.out.println("el numero 2 es el menor ");
        }
 
     }

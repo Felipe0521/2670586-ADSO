@@ -26,7 +26,7 @@ public class Ejercicio09 {
 
             System.out.print("Su salario total mas horas extra es : " +resultado);
         }if (horas <= 40){
-            System.out.print("Su salario total  es : " +valor);
+            System.out.print("Su salario total  es : " +valor+ "pesos");
         }
     }
 }
