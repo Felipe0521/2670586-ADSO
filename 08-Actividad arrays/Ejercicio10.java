@@ -36,6 +36,23 @@ public class Ejercicio10 {
         System.out.print("Arreglo sin repetir: ");
         System.out.print("[");
         
-        
+        // impimir no repetidos//
+        for (int i = 0; i < arreglo.length; i++) {
+            boolean unico = true;
+            for (int j = i; j < arreglo.length; j++) {
+                
+             if (arreglo[j] == arreglo[i] ) {
+                if (i != j) {
+                     unico = false;
+                }
+               
+             }  
+
+            }
+           if (unico == true) {
+            System.out.print(arreglo[i]+", ");
+           }
+        }
+        System.out.print("]");
     }
 }

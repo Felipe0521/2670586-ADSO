@@ -47,7 +47,7 @@ public class Ejercicio09 {
              
          }
         if (contador == 0) {
-            System.out.print("No se encontraron coincidencias dentro del arreglo");
+            System.out.print("-1");
         }
          
          

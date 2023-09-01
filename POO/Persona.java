@@ -76,12 +76,10 @@ public class Persona {
         System.out.println("|---------------------------------------------------| ");
     }
 
-    public void actividadFisica(int minutos){
-        peso = peso- ((peso * 0.00005)*minutos);
-    }
-    public void aumentarPeso(int calorias){
-        peso = peso + (calorias * 0.00005);
-    }
+   public String getInfoInLine(){
+    String texto = cedula+" - "+nombres+" "+apellidos+" - "+edad+" anhos - "+altura+" cm - "+peso+" kg";
+    return texto; 
+   }
 }
 
 
