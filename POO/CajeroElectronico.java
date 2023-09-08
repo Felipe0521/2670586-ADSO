@@ -146,7 +146,11 @@ public class CajeroElectronico {
         }
     }
 
-    public void verHistorialCajero(){
+    public void verHistorialCajero(String user,String pass){
+        if (user.equals(usuarioAdmin) && pass.equals(claveAdmin) ) {
+
+            registrarTransaccion("HISTORIAL", "0000 0000 0000 0000", 0 , "OK");
+            
             System.out.println("\n\n");
             System.out.println("+-------------------------------------+");
 			System.out.println("+          HISTORIAL CAJERO           +");
@@ -157,16 +161,78 @@ public class CajeroElectronico {
             }
            
         }
+            
+        }else{
+            System.out.println("\n\n");
+            System.out.println("+-------------------------+");
+            System.out.println("|CLAVE O USUARIO INCORRECTO|");
+            System.out.println("+-------------------------+");
+             registrarTransaccion("HISTORIAL", "0000 0000 0000 0000", 0 , "ERROR PASSWORD");
+        }
+          
     }
 
-    public void consignarDineroaTarjeta(String tipo ,String numeroTarjeta, int monto, String nombre_Banco, String nombre_Propietario){
-    
+    public void consignarDineroaTarjeta(TarjetaDebito tarjeta, int cant_10, int cant_20, int cant_50, int cant_100, String clave ){
+          int monto = (cant_10*10000)+(cant_20*20000)+(cant_50*50000)+(cant_100*100000);
+        //validar la clave//
+        if (tarjeta.validarClave(clave)) {
+             // validar estado de la tarjeta//
+            if (tarjeta.validarEstadoActiva()) {
+                 // monto mayor a 0//
+                    if (monto > 0) {
+                        // validar que el dinero ingresado no se supere el limite del cajero//
+                        if ((dineroDisponible + monto) <= limiteTotal) {
+                            tarjeta.aumentarSaldo(monto, clave);
+
+                            //aumentar saldo de la tarjeta//
+                            dineroDisponible += monto;
+
+                            // aumentar saldo del cajero y cant billetes//
+                            this.cant_10 = cant_10;
+                            this.cant_20 = cant_20;
+                            this.cant_50 = cant_50;
+                           this.cant_100 = cant_100;
+
+                             System.out.println("+--------------------------------+");
+                            System.out.println("|     CONSIGNACION EXITOSA|       ");
+                             System.out.println("+--------------------------------+");
+                            registrarTransaccion("CONSIGNACION", tarjeta.getNumero_Tarjeta() ,monto, "OK");
+                        }else{
+                            System.out.println("+--------------------------------+");
+                            System.out.println("|ERROR MONTO SUPERIOR-CONSIGNAR DINERO|");
+                            System.out.println("+--------------------------------+");
+                            registrarTransaccion("CONSIGNACION", tarjeta.getNumero_Tarjeta() ,monto, "ERROR MONTO");
+                    }
+                        }else{
+                            System.out.println("+--------------------------------+");
+                             System.out.println("|ERROR MONTO INFERIOR-CONSIGNAR DINERO|");
+                            System.out.println("+--------------------------------+");
+                             registrarTransaccion("CONSIGNACION", tarjeta.getNumero_Tarjeta() ,monto, "ERROR MONTO");
+                        }
+                    }else{
+                System.out.println("+--------------------------------+");
+                System.out.println("|ERROR ESTADO TARJETA-CONSIGNAR DINERO|");
+                System.out.println("+--------------------------------+");
+                 registrarTransaccion("CONSIGNACION", tarjeta.getNumero_Tarjeta() ,monto, "ERROR ESTADO");
+                    }
+            }else{
+                 System.out.println("+--------------------------------+");
+                System.out.println("|ERROR CONTRASEÑA-CONSIGNAR DINERO|");
+               System.out.println("+--------------------------------+");
+               registrarTransaccion("CONSIGNACION", tarjeta.getNumero_Tarjeta() ,monto, "ERROR PASSWORD");
+            }
+        }
+       
+       
+        
+
+        
+        
+       
+       
     }
 
-     public void retirarDineroTarjeta(String tipo, String numeroTarjeta, int monto, String nombre_Banco, String nombre_Propietario){
-    
-    }
+     
+
 
     
-
-}
