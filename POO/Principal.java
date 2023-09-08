@@ -284,7 +284,7 @@ public class Principal{
 
 
 			if(opcion==11){
-				System.out.println();
+				System.out.println("\n\n");
 				System.out.println("+-------------------------+");
 				System.out.println("|-------- SALIENDO -------|");
 				System.out.println("+-------------------------+");
