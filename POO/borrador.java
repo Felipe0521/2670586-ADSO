@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Principal2 {
+public class borrador {
     public static void main(String[] args) {
         Scanner entrada_numero = new Scanner( System.in );
 		Scanner entrada_texto = new Scanner( System.in );
@@ -9,13 +9,7 @@ public class Principal2 {
 
     listaCajeroElectronico[0] = new CajeroElectronico(100000000, "BANCOLOMBIA", "123", "123S");
     listaCajeroElectronico[1] = new CajeroElectronico(150000000, "Davivienda", "987", "987");
-    listaTarjetaDebito[0] = new TarjetaDebito("Pipe", "1234 980 345 345", "Davivienda", 0, 15000000, "8901", "ACTIVA", args );
-    listaTarjetaDebito[1] = new TarjetaDebito("Dani", "4341 389 543 983", "BANCOLOMBIA", 100000, 10000000, "1931", "ACTIVA", args );
-    listaTarjetaDebito[2] = new TarjetaDebito("Sandra", "4231 876 176 343", "BANCOLOMBIA", 100000, 12000000, "1931", "ACTIVA", args ); 
-    listaTarjetaDebito[3] = new TarjetaDebito("Nilo", "4231 081 341 543", "Davivienda", 100000, 15000000, "1931", "ACTIVA", args );
-    listaTarjetaDebito[4] = new TarjetaDebito("Vale", "4231 099 561 903", "Davivienda", 100000, 20000000, "1931", "ACTIVA", args );   
-    listaTarjetaDebito[5] = new TarjetaDebito("vane", "4234 033 309 173", "BANCOLOMBIA", 100000, 15000000, "1931", "ACTIVA", args );
-
+   
     listaCajeroElectronico[0].imprimirDetalle();
     int indiceTarjeta = 5;
 		int opcion = 0;
