@@ -3,17 +3,15 @@ import java.util.Scanner;
 public class Ejercisio07 {
 
     public static void main(String[] args) {
-        Scanner entrada = new Scanner(System.in);
+        
 
-        System.out.print("Ingrese tamanho del arreglo: ");
-        int tamanho = entrada.nextInt();
-
-       llenarArreglo(tamanho);
+       
+       llenarArreglo(6);
 
 
 
     }
-     public static int[] llenarArreglo(int tamanho){
+     public static void llenarArreglo(int tamanho){
          int arreglo[] = new int[tamanho];
         System.out.println("Arreglo lleno: ");
         for (int i = 0; i < arreglo.length; i++) {
@@ -32,7 +30,7 @@ public class Ejercisio07 {
                 System.out.print("]");
             }
         }
-        return arreglo;
+        
         }
 
 }
