@@ -133,7 +133,7 @@ public class Perro {
 
     public void dormir(double horas){
         energia = energia + ((int)horas*10);
-        estado = "DURMIENDO";s
+        estado = "DURMIENDO";
     }
 
     public void defecar(int gramos){
@@ -147,4 +147,9 @@ public class Perro {
             estado = "CANSADO";
         }
     }
+
+    public String getInfoInLine(){
+        String texto = nombre+" - "+propietario+" - "+raza+" - "+edad+" anhos - "+peso+" kg - "+energia+" de energia - "+"Estado: "+estado;
+        return texto; 
+       }
 }
