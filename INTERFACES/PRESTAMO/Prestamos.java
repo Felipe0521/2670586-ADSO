@@ -12,7 +12,7 @@ public class Prestamos extends JFrame {
     }
 
     public void initComponents(){
-        setTitle("Similador de Prestamos");
+        setTitle("Simulador de Prestamos");
         setIconImage(getToolkit().createImage( ClassLoader.getSystemResource("imagenes/icono_factura.png") ));
         setSize(400, 500);
         setLocationRelativeTo(null);
@@ -156,7 +156,7 @@ public class Prestamos extends JFrame {
         JScrollPane scroll = new JScrollPane(etq_plan_pagos);
         restrincciones.gridx = 0;
         restrincciones.gridy = 6;
-        restrincciones.gridwidth = 2;
+        restrincciones.gridwidth = 3;
         restrincciones.gridheight = 1;
         restrincciones.weightx = 100;
         restrincciones.weighty = 90;
@@ -184,7 +184,7 @@ public class Prestamos extends JFrame {
         ActionListener evento_calcular = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Ha dado click en calcular");
+                
                 double capital = Double.parseDouble(campo_capital.getText());
                 double interes = Double.parseDouble(campo_intereses.getText());
                 double cuotas = Double.parseDouble(campo_cuotas.getText());
@@ -210,7 +210,10 @@ public class Prestamos extends JFrame {
        ActionListener evento_limpiar = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Ha dado click en limpiar");
+                String vaciar = "<html>";
+                vaciar+= "</html>";
+                etq_plan_pagos.setText(vaciar);
+
                 
             }
         };
