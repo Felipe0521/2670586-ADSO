@@ -56,7 +56,7 @@ public class Factura extends JFrame{
 
           JTextField campo_cedula = new JTextField();
         campo_cedula.setColumns(12);
-        
+         
         restricciones.gridx = 1;
         restricciones.gridy = 1;
         restricciones.gridwidth = 1;

@@ -156,7 +156,7 @@ public class Prestamos extends JFrame {
         JScrollPane scroll = new JScrollPane(etq_plan_pagos);
         restrincciones.gridx = 0;
         restrincciones.gridy = 6;
-        restrincciones.gridwidth = 3;
+        restrincciones.gridwidth = 2;
         restrincciones.gridheight = 1;
         restrincciones.weightx = 100;
         restrincciones.weighty = 90;
