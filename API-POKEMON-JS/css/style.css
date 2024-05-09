@@ -1,0 +1,94 @@
+@font-face {
+    font-family: 'PokemonSolid'; /* Nombre que asignamos a la fuente */
+    src: url('Pokemon.ttf') format('truetype'); /* Ruta de la fuente descargada */
+}
+
+/* Ahora puedes usar la fuente en cualquier otro selector */
+h2 {
+    font-family: 'PokemonSolid', sans-serif; /* Utilizamos el nombre que asignamos a la fuente */
+}
+
+#contenedorPrincipal{
+
+    border: 4px solid #91A8D0; /* Borde sólido de 2px de grosor */
+    border-radius: 10px; /* Esquinas redondeadas con un radio de 10px */
+    padding: 20px; /* Espacio interno dentro del div para que el contenido no esté pegado al borde */        
+        
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 300px;
+}
+
+#contenedorPokemones {
+    border: 4px solid #91A8D0;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column; /* Apilamos los elementos verticalmente */
+    align-items: center; /* Centramos horizontalmente los elementos */
+}
+
+#nombre_pokemon {
+    margin-bottom: 20px; /* Espacio entre el título y las imágenes */
+}
+
+#imagen_pokemon {
+    width: 300px;
+    height: 300px;
+    border-radius: 8px;
+    display: none;
+    margin: 10px;
+}
+
+#imagen_carga {
+    width: 300px;
+    height: 300px;
+    border-radius: 8px;
+    margin: 10px;
+}
+
+
+
+#botones{
+     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      width: 130px;
+     /* Calcula el ancho de cada botón para ocupar la mitad del contenedor y deja un pequeño espacio entre ellos */
+    margin-bottom: 3px; /* Espacio entre filas */
+}
+
+
+
+/* Define una animación llamada "movimiento" */
+@keyframes movimiento {
+      0% {
+            transform: translate(0, -20px); /* Posición inicial arriba del punto de origen */
+        }
+        25% {
+            transform: translate(20px, 0); /* Mueve a la derecha */
+        }
+        50% {
+            transform: translate(0, 20px); /* Mueve hacia abajo */
+        }
+        75% {
+            transform: translate(-20px, 0); /* Mueve a la izquierda */
+        }
+        100% {
+            transform: translate(0, -20px); /* Vuelve a la posición inicial arriba del punto de origen */
+        }
+  }
+  
+  /* Aplica la animación "movimiento" al elemento con el ID "imagen_movimiento" */
+  #imagen_pokemon {
+      animation: movimiento 6s infinite; /* La animación dura 3 segundos y se repite infinitamente */
+  }
+
+  #button{
+      
+      position: absolute; /* Posición absoluta para que el botón pueda moverse libremente dentro del div */
+    bottom: 0; /* Se coloca en la parte inferior */
+    right: 0; /* Se coloca a la izquierda */
+    margin: 10px; 
+  }
+  
