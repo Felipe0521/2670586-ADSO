@@ -1,0 +1,108 @@
+h4, h1{
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-weight: 100;
+}
+body{
+      background: antiquewhite;
+}
+
+#imagen_carga {
+    width: 300px;
+    height: 300px;
+    border-radius: 8px;
+    margin: 10px;
+}
+
+#contenedorOpciones{
+     
+      background: bisque;
+      border: 4px solid burlywood; /* Borde sólido de 2px de grosor */
+      border-radius: 10px; /* Esquinas redondeadas con un radio de 10px */
+      padding: 25px; /* Espacio interno dentro del div para que el contenido no esté pegado al borde */        
+          
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: 300px;
+
+  }
+
+  #botones{
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-size: 20px;
+       width: 200px;
+       max-width: 200px;
+       max-height: 250px;
+      /* Calcula el ancho de cada botón para ocupar la mitad del contenedor y deja un pequeño espacio entre ellos */
+     margin-bottom: 10px; /* Espacio entre filas */
+ }
+
+#contenedorPersonas{
+      
+      border: 4px solid burlywood; /* Borde sólido de 2px de grosor */
+      border-radius: 10px; /* Esquinas redondeadas con un radio de 10px */
+      padding: 20px; 
+      overflow: auto;
+      max-width: 900px;
+      height: 450px;
+} 
+#form_insertar{
+    display: none;
+}
+#personasMostrar{
+    display: none;
+    padding: 10px;
+}
+#form_modificar{
+    display: none;
+}
+#form_eliminar{
+    display: none;
+}
+#form {
+      max-width: 700px;
+      height: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+  }
+  
+  .form-group {
+      width: calc(50% - 10px);
+      margin-bottom: 10px;
+      box-sizing: border-box;
+  }
+  
+  label,
+  input[type="text"] {
+      width: 100%;
+  }
+  
+  input[type="submit"] {
+      margin-top: 20px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      width: 60%;
+      height: 35px;
+      
+      background-color: #003967;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 15px;
+  }
+  
+  input[type="submit"]:hover {
+      background-color: #0056b3;
+  }
+  
+  
