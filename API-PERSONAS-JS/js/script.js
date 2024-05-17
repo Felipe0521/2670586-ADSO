@@ -117,7 +117,7 @@ function insertarPersona(){
         }).catch(error => {
           console.error('Error al insertar los datos:', error);
 
-          if (data.status) { // Suponiendo que la API devuelve { success: true } en caso de éxito
+          if (data.status) { 
             mensajeExito.style.display = 'block';
             mensajeExito.innerHTML = "Persona registrada con éxito";
             
