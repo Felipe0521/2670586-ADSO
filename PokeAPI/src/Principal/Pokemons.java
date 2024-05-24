@@ -25,8 +25,9 @@ public class Pokemons extends javax.swing.JFrame {
      */
     ConsumoAPI consumo;
     public Pokemons() {
+          initComponents();
          initAlternComponents();
-         initComponents();
+       
         consumo = new ConsumoAPI();
           String respuesta1 = consumo.consumoGET("https://pokeapi.co/api/v2/pokemon");
         imprimirPokemones(respuesta1);
@@ -42,7 +43,15 @@ public class Pokemons extends javax.swing.JFrame {
         setIconImage(getToolkit().createImage(ClassLoader.getSystemResource("imagenes/pokeball.png")));
         
        
+         etq_atras.setBackground(Color.WHITE);
+        Image icono_listar = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_atras.png"));
+        icono_listar = icono_listar.getScaledInstance(45, 45, Image.SCALE_SMOOTH);
+        etq_atras.setIcon(new ImageIcon(icono_listar));
         
+        etq_siguiente.setBackground(Color.WHITE);
+        Image icono_listar1 = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_siguiente.png"));
+        icono_listar1 = icono_listar1.getScaledInstance(45, 45, Image.SCALE_SMOOTH);
+        etq_siguiente.setIcon(new ImageIcon(icono_listar1));
         
        
         revalidate();
@@ -115,7 +124,8 @@ public class Pokemons extends javax.swing.JFrame {
         detalles_pokemon = new javax.swing.JPanel();
         etq_nombre = new javax.swing.JLabel();
         etq_imagen = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        etq_atras = new javax.swing.JLabel();
+        etq_siguiente = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,36 +142,43 @@ public class Pokemons extends javax.swing.JFrame {
 
         etq_imagen.setText("etq_imagen");
 
-        jLabel2.setText("jLabel2");
-
         javax.swing.GroupLayout detalles_pokemonLayout = new javax.swing.GroupLayout(detalles_pokemon);
         detalles_pokemon.setLayout(detalles_pokemonLayout);
         detalles_pokemonLayout.setHorizontalGroup(
             detalles_pokemonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, detalles_pokemonLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(etq_imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(144, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, detalles_pokemonLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(etq_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, detalles_pokemonLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(etq_atras, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(etq_imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(etq_siguiente, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                .addGap(17, 17, 17))
         );
         detalles_pokemonLayout.setVerticalGroup(
             detalles_pokemonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(detalles_pokemonLayout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addComponent(etq_nombre)
                 .addGroup(detalles_pokemonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(detalles_pokemonLayout.createSequentialGroup()
-                        .addGap(208, 208, 208)
-                        .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(detalles_pokemonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(detalles_pokemonLayout.createSequentialGroup()
+                                .addComponent(etq_imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(80, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, detalles_pokemonLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(etq_atras, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(151, 151, 151))))
                     .addGroup(detalles_pokemonLayout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(etq_nombre)
-                        .addGap(18, 18, 18)
-                        .addComponent(etq_imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addGap(109, 109, 109)
+                        .addComponent(etq_siguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -171,11 +188,11 @@ public class Pokemons extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(botones, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addGap(65, 65, 65)
                 .addComponent(detalles_pokemon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(297, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(272, 272, 272))
         );
@@ -185,10 +202,10 @@ public class Pokemons extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(botones)
-                    .addComponent(detalles_pokemon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(287, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(detalles_pokemon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botones, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         pack();
@@ -233,9 +250,10 @@ public class Pokemons extends javax.swing.JFrame {
     private javax.swing.JScrollPane botones;
     private javax.swing.JPanel botones_pokemon;
     private javax.swing.JPanel detalles_pokemon;
+    private javax.swing.JLabel etq_atras;
     private javax.swing.JLabel etq_imagen;
     private javax.swing.JLabel etq_nombre;
+    private javax.swing.JLabel etq_siguiente;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
