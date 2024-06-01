@@ -7,11 +7,14 @@ package dijiapi;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import utils.ConsumoAPI;
 
 /**
@@ -26,7 +29,7 @@ public class CardPokemon extends javax.swing.JPanel {
       JsonObject pokemon;
      
     public CardPokemon(JsonObject data) {
-          ConsumoAPI consumo = new ConsumoAPI();
+        
         this.pokemon = data;
         initComponents();
         initAltherComponents();
@@ -36,16 +39,18 @@ public class CardPokemon extends javax.swing.JPanel {
     public void initAltherComponents(){
          etq_nombre.setText( this.pokemon.get("name").getAsString() );
          cargarImagenPokemon();
+         
+          
     }
     
     public void cargarImagenPokemon(){
         try {
             
             String url = this.pokemon.get("image").getAsString();
-            System.out.println(url);
+          
             URL imgUrl = new URL(url);
             Image imagen = getToolkit().createImage(imgUrl);
-            imagen = imagen.getScaledInstance(200, 160, Image.SCALE_SMOOTH);
+            imagen = imagen.getScaledInstance(204, 143, Image.SCALE_SMOOTH);
             imagen_pokemon.setIcon(new ImageIcon(imagen));
         } catch (MalformedURLException ex) {
             Logger.getLogger(CardPokemon.class.getName()).log(Level.SEVERE, null, ex);
@@ -90,8 +95,8 @@ public class CardPokemon extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(imagen_pokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(imagen_pokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(etq_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(8, 8, 8))
         );

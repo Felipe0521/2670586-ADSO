@@ -11,49 +11,62 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import utils.ConsumoAPI;
 
 /**
  *
  * @author felip
  */
-public final class Pokemon extends javax.swing.JFrame {
+public  class Pokemon extends javax.swing.JFrame {
 
     /**
      * Creates new form Pokemon
      */
     ConsumoAPI consumo;
     int pagina;
+    int tamaño;
      int[] listaNumeros = {1,2,3,4,5,6,7};
     public Pokemon() {
-        this.pagina = 2;
+        this.pagina = 1;
          this.consumo = new ConsumoAPI();
        initComponents();
         initAlternComponents();
-        cargarPokemones();
         cargarPaginador();
+        cargarPokemones();
+         String endpoint = "https://digi-api.com/api/v1/digimon?page="+1;
+         String data = this.consumo.consumoGET(endpoint);
+        
+        JsonObject dataJson = JsonParser.parseString(data).getAsJsonObject();
+         String hola =  dataJson.getAsJsonObject("pageable").get("totalPages").getAsString();
+         this.tamaño =  Integer.parseInt(hola);
         
     }
     
      public void initAlternComponents(){
          setTitle("Menu");
-        setLocationRelativeTo(null);
+         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         setLocation(60, 5);
         setVisible(true);
         setResizable(false);
+        contenedor_pokemones.setBorder(new EmptyBorder(10, 10, 10, 10));
         
           Image icono_registro = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/digimon.png"));
         icono_registro = icono_registro.getScaledInstance(200, 100, Image.SCALE_SMOOTH);
         etq_imagen.setIcon(new ImageIcon(icono_registro));
-        setIconImage(getToolkit().createImage(ClassLoader.getSystemResource("imagenes/digimon.png")));
+        setIconImage(getToolkit().createImage(ClassLoader.getSystemResource("imagenes/pokeball.png")));
     }
     
     public void cargarPokemones(){
-        int offset = (pagina*20)-20;
+        int offset = (pagina*5)-5;
        
           int anchoDeseado = 216; // ajusta este valor según tus necesidades
           int altoDeseado = 186;  // ajusta este valor según tus necesidades
@@ -61,11 +74,11 @@ public final class Pokemon extends javax.swing.JFrame {
         
        String endpoint = "https://digi-api.com/api/v1/digimon?page="+offset;
        String data = this.consumo.consumoGET(endpoint);
-        System.out.println("dijiapi.Pokemon.cargarPokemones()"+data);
+        
         JsonObject dataJson = JsonParser.parseString(data).getAsJsonObject();
         JsonArray results = dataJson.getAsJsonArray("content");
-        int tamaño = results.size();
-        System.out.println(tamaño);
+        
+        
         contenedor_pokemones.removeAll();
        for (int i=0; i<results.size(); i++) {
              JsonObject temp = results.get(i).getAsJsonObject();
@@ -73,6 +86,18 @@ public final class Pokemon extends javax.swing.JFrame {
              carta.setPreferredSize(new Dimension(anchoDeseado, altoDeseado));
             
              
+             String url = temp.get("href").getAsString();
+             String datosUrl = this.consumo.consumoGET(url);
+             JsonObject objetoUrl = JsonParser.parseString(datosUrl).getAsJsonObject();
+             
+             
+             carta.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Aquí puedes definir la acción a realizar cuando se haga clic en el JLabel
+                DetallesPokemon detalles = new DetallesPokemon(objetoUrl);
+            }
+        });
              contenedor_pokemones.add(carta);
              revalidate();
              repaint();
@@ -80,7 +105,7 @@ public final class Pokemon extends javax.swing.JFrame {
         
     }
     
-     public void cargarPaginador(){
+      public void cargarPaginador(){
         panelPaginador.removeAll();
         panelPaginador.add(Box.createHorizontalGlue());
         
@@ -90,7 +115,10 @@ public final class Pokemon extends javax.swing.JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                    pagina = 1;
+                   
                    cargarPokemones();
+                   
+                   
                 }
             });
         panelPaginador.add(primerpagina);
@@ -101,6 +129,9 @@ public final class Pokemon extends javax.swing.JFrame {
                 public void actionPerformed(ActionEvent e) {
                    pagina = pagina-1;
                    cargarPokemones();
+                  
+                    modificarlista();
+                   
                 }
             });
         panelPaginador.add(anteriorpagina);
@@ -128,6 +159,9 @@ public final class Pokemon extends javax.swing.JFrame {
                 public void actionPerformed(ActionEvent e) {
                    pagina = pagina+1;
                    cargarPokemones();
+                  
+                    modificarlista();
+                   
                 }
             });
         panelPaginador.add(siguientepagina);
@@ -136,7 +170,7 @@ public final class Pokemon extends javax.swing.JFrame {
         ultimapagina.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                   pagina = 65;
+                   pagina = tamaño;
                    cargarPokemones();
                 }
             });
@@ -152,11 +186,19 @@ public final class Pokemon extends javax.swing.JFrame {
     }
     
     public void modificarlista(){
-        int mod = 3;
+        int mod;
+        if(pagina < 4){
+           mod = 0;
+        }else{
+          mod = 3;
+        }
+        
         for (int i = 0; i < listaNumeros.length; i++) {
+            
             
             listaNumeros[i] = pagina-mod;
             mod--;
+            
         }
         cargarPaginador();
     }
@@ -183,52 +225,43 @@ public final class Pokemon extends javax.swing.JFrame {
 
         etq_imagen.setText("jLabel1");
 
+        contenedor_pokemones.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         contenedor_pokemones.setLayout(new java.awt.GridLayout(2, 3, 2, 1));
 
-        javax.swing.GroupLayout panelPaginadorLayout = new javax.swing.GroupLayout(panelPaginador);
-        panelPaginador.setLayout(panelPaginadorLayout);
-        panelPaginadorLayout.setHorizontalGroup(
-            panelPaginadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
-        panelPaginadorLayout.setVerticalGroup(
-            panelPaginadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 54, Short.MAX_VALUE)
-        );
+        panelPaginador.setLayout(new javax.swing.BoxLayout(panelPaginador, javax.swing.BoxLayout.LINE_AXIS));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelPaginador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(contenedor_pokemones, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(271, 271, 271)
-                        .addComponent(etq_imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addGap(276, 276, 276)
+                .addComponent(etq_imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 47, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panelPaginador, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(contenedor_pokemones, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(etq_imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(contenedor_pokemones, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelPaginador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(contenedor_pokemones, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panelPaginador, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
