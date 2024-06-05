@@ -53,7 +53,7 @@ public  class Pokemon extends javax.swing.JFrame {
     
      public void initAlternComponents(){
          setTitle("Menu");
-         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         
          setLocation(60, 5);
         setVisible(true);
         setResizable(false);
@@ -72,7 +72,7 @@ public  class Pokemon extends javax.swing.JFrame {
           int altoDeseado = 186;  // ajusta este valor según tus necesidades
           // ajusta este valor según tus necesidades
         
-       String endpoint = "https://digi-api.com/api/v1/digimon?page="+offset;
+       String endpoint = "https://digi-api.com/api/v1/digimon?page="+pagina;
        String data = this.consumo.consumoGET(endpoint);
         
         JsonObject dataJson = JsonParser.parseString(data).getAsJsonObject();
@@ -114,9 +114,11 @@ public  class Pokemon extends javax.swing.JFrame {
          primerpagina.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                   pagina = 1;
                    
+                   pagina = 1;
+                   modificarlista();
                    cargarPokemones();
+                   
                    
                    
                 }
@@ -127,10 +129,14 @@ public  class Pokemon extends javax.swing.JFrame {
          anteriorpagina.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                   pagina = pagina-1;
+                     if (pagina >= 1){
+                      pagina = pagina-1;
+                    }
+                   
                    cargarPokemones();
                   
                     modificarlista();
+                  
                    
                 }
             });
@@ -148,6 +154,7 @@ public  class Pokemon extends javax.swing.JFrame {
                    pagina = in;
                   modificarlista();
                    cargarPokemones();
+                 
                 }
             });
         }
@@ -157,7 +164,10 @@ public  class Pokemon extends javax.swing.JFrame {
         siguientepagina.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                   pagina = pagina+1;
+                     if (pagina < tamaño){
+                      pagina = pagina+1;
+                    }
+                   
                    cargarPokemones();
                   
                     modificarlista();
@@ -171,7 +181,9 @@ public  class Pokemon extends javax.swing.JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                    pagina = tamaño;
+                   modificarlista();
                    cargarPokemones();
+                   
                 }
             });
         panelPaginador.add(ultimapagina);
@@ -186,11 +198,12 @@ public  class Pokemon extends javax.swing.JFrame {
     }
     
     public void modificarlista(){
-        int mod;
+        int mod = 3;
         if(pagina < 4){
            mod = 0;
-        }else{
-          mod = 3;
+        }
+        if(pagina > 287){
+            mod = 7;           
         }
         
         for (int i = 0; i < listaNumeros.length; i++) {

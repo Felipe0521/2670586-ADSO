@@ -40,13 +40,14 @@ public class DetallesPokemon extends javax.swing.JFrame {
     
     public void initAltherComponents(){
          setTitle("Detalles");
-         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
          setLocation(843, 5);
+         
         setVisible(true);
         setResizable(false);
          tabla_pokemon.setIntercellSpacing(new Dimension(10, 0));
        
-        
+       
          
         setIconImage(getToolkit().createImage(ClassLoader.getSystemResource("imagenes/digimon.png")));
     
