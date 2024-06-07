@@ -1,0 +1,65 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #b3ed6c;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #bff39a;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(4, 230, 61, 0.1);
+}
+
+h1 {
+    text-transform: uppercase;
+    text-align: center;
+    color: #333;
+}
+
+h5 {
+    margin: 0px !important;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #f6efef;
+    padding: 10px;
+}
+
+pre {
+    display: inline-block;
+    margin:0px !important; 
+    padding:0px !important; 
+    text-align: left !important;
+    color: red;
+}
+
+.input-list{
+    padding-top: 5px;
+    padding-left: 30px;
+    padding-bottom: 5px;
+}
+
+.input-list li {
+    margin:0px;
+    padding: 0px;
+}
+
+.endpoint-name {
+    font-weight: bold;
+    color: #231787;
+}
+
+.endpoint-path {
+    color: #555;
+}
